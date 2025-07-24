@@ -37,16 +37,18 @@ services:
    volumes:
     - ./redis-data:/data
    command: ["redis-server", "--appendonly", "yes", "--notify-keyspace-events", "Ex"]
-  janus:
-   image: meetecho/janus-gateway
-   container_name: janus
-   ports:
-     - "8088:8088"   # HTTP REST API
-     - "8188:8188"   # WebSocket
-     - "10000-10200:10000-10200/udp"  # Media ports (WebRTC)
-   environment:
-     - JANUS_LOG_LEVEL=4
-   restart: always
+  neo4j:
+    image: neo4j:5.20
+    container_name: neo4j
+    ports:
+      - "7474:7474"   # HTTP Browser
+      - "7687:7687"   # Bolt protocol (Neo4j driver, apps)
+    environment:
+      - NEO4J_AUTH=neo4j/password123  # username/password
+    volumes:
+      - ./neo4j-data:/data
+    restart: always
+
 volumes:
   kafka-data:
 

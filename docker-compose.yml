@@ -44,7 +44,7 @@ services:
       - "7474:7474"   # HTTP Browser
       - "7687:7687"   # Bolt protocol (Neo4j driver, apps)
     environment:
-      - NEO4J_AUTH=neo4j/password123  # username/password
+      - NEO4J_AUTH=neo4j/12345678  # username/password
     volumes:
       - ./neo4j-data:/data
     restart: always
